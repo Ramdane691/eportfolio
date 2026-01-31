@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Projets</title>
+  <meta name="description" content="Portfolio — Projets web, mobile et logiciel" />
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#121a2a;
+      --muted:#a8b3cf;
+      --text:#e8eefc;
+      --accent:#4ade80; /* vert discret */
+      --border:rgba(232,238,252,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 30% -10%, rgba(74,222,128,.14), transparent 55%),
+                  radial-gradient(1000px 700px at 100% 0%, rgba(56,189,248,.10), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px}
+    header{
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between;
+      padding:22px; border:1px solid var(--border); background:rgba(18,26,42,.75);
+      border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(8px);
+    }
+    .title h1{margin:0 0 6px; font-size:22px; letter-spacing:.2px}
+    .title p{margin:0; color:var(--muted); font-size:14px}
+    .btns{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:12px;
+      border:1px solid var(--border); background:rgba(255,255,255,.04);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      font-size:14px; color:var(--text);
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(74,222,128,.35); background: rgba(74,222,128,.07)}
+    .btn.primary{border-color: rgba(74,222,128,.35); background: rgba(74,222,128,.12)}
+    .row{
+      margin-top:18px;
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .search{
+      flex:1 1 320px;
+      display:flex; gap:10px; align-items:center;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid var(--border); background: rgba(18,26,42,.65);
+    }
+    .search input{
+      width:100%; border:none; outline:none; background:transparent; color:var(--text);
+      font-size:14px;
+    }
+    .chips{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    .chip{
+      padding:8px 10px; border-radius:999px;
+      border:1px solid var(--border); color:var(--muted);
+      background: rgba(255,255,255,.03);
+      font-size:12px; cursor:pointer;
+      transition: border-color .12s ease, background .12s ease, color .12s ease;
+    }
+    .chip.active{
+      color: var(--text);
+      border-color: rgba(74,222,128,.40);
+      background: rgba(74,222,128,.10);
+    }
+    main{margin-top:18px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column: span 6;
+      border:1px solid var(--border);
+      background: rgba(18,26,42,.75);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px 16px 14px;
+      display:flex; flex-direction:column; gap:12px;
+      min-height: 210px;
+    }
+    @media (max-width: 860px){ .card{grid-column: span 12;} header{flex-direction:column; align-items:stretch} .btns{justify-content:flex-start}}
+    .top{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+    .name{display:flex; flex-direction:column; gap:4px}
+    .name h2{margin:0; font-size:16px}
+    .subtitle{color:var(--muted); font-size:13px}
+    .badge{
+      font-size:12px; color: rgba(74,222,128,.95);
+      border:1px solid rgba(74,222,128,.35);
+      background: rgba(74,222,128,.08);
+      padding:6px 10px; border-radius:999px; white-space:nowrap;
+    }
+    .tags{display:flex; gap:6px; flex-wrap:wrap}
+    .tag{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      padding:6px 9px; border-radius:999px;
+    }
+    .desc{margin:0; color:var(--text); font-size:14px}
+    details{
+      border-top:1px dashed rgba(232,238,252,.14);
+      padding-top:10px;
+    }
+    summary{
+      cursor:pointer; color: var(--muted); font-size:13px;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    .bullets{margin:10px 0 0; padding-left:18px; color: var(--muted); font-size:13px}
+    .links{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto}
+    .linkbtn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 11px; border-radius:12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      font-size:13px; color: var(--text);
+    }
+    .linkbtn:hover{border-color: rgba(74,222,128,.35); background: rgba(74,222,128,.07)}
+    footer{margin-top:22px; color:var(--muted); font-size:12px; text-align:center}
+    .hidden{display:none !important}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>Portfolio — Projets</h1>
+        <p>Développement full-stack à dominante backend • Web / Mobile / Logiciel</p>
+      </div>
+      <div class="btns">
+        <!-- Remplace les liens -->
+        <a class="btn primary" href="CV.pdf" target="_blank" rel="noopener">📄 CV</a>
+        <a class="btn" href="https://github.com/TON_GITHUB" target="_blank" rel="noopener">💻 GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/TON_LINKEDIN" target="_blank" rel="noopener">🔗 LinkedIn</a>
+        <a class="btn" href="mailto:ton.email@example.com">✉️ Contact</a>
+      </div>
+    </header>
+
+    <div class="row">
+      <div class="search" role="search">
+        🔎 <input id="q" type="search" placeholder="Rechercher un projet (ex: React, C++, stock, MVC...)" />
+      </div>
+      <div class="chips" aria-label="Filtres">
+        <button class="chip active" data-filter="all">Tous</button>
+        <button class="chip" data-filter="web">Web</button>
+        <button class="chip" data-filter="mobile">Mobile</button>
+        <button class="chip" data-filter="backend">Backend</button>
+        <button class="chip" data-filter="frontend">Frontend</button>
+        <button class="chip" data-filter="db">DB</button>
+        <button class="chip" data-filter="java">Java</button>
+        <button class="chip" data-filter="cpp">C++</button>
+        <button class="chip" data-filter="game">Game</button>
+      </div>
+    </div>
+
+    <main>
+      <div class="grid" id="grid">
+
+        <!-- BRICKMASTER -->
+        <article class="card" data-tags="web backend db">
+          <div class="top">
+            <div class="name">
+              <h2>BrickMaster</h2>
+              <div class="subtitle">Application web (MVC) • Grille interactive</div>
+            </div>
+            <span class="badge">Projet Web</span>
+          </div>
+
+          <div class="tags">
+            <span class="tag">Web</span><span class="tag">MVC</span><span class="tag">Python</span><span class="tag">HTML/CSS</span>
+          </div>
+
+          <p class="desc">
+            Application web centrée sur une <strong>grille interactive</strong> : rendu HTML côté vue, contrôleur dédié,
+            et logique de mise à jour des cellules (couleurs/états).
+          </p>
+
+          <details>
+            <summary>Voir détails (fonctionnalités & points techniques)</summary>
+            <ul class="bullets">
+              <li>Architecture <strong>MVC</strong> (séparation modèle / vue / contrôleur).</li>
+              <li>Génération de grille et mise à jour de l’état via formulaires/handlers.</li>
+              <li>Gestion de données (ex: pioche/couleurs) côté backend.</li>
+            </ul>
+          </details>
+
+          <div class="links">
+            <a class="linkbtn" href="https://github.com/TON_GITHUB/brickmaster" target="_blank" rel="noopener">💻 GitHub</a>
+            <a class="linkbtn" href="#" target="_blank" rel="noopener">🚀 Démo</a>
+          </div>
+        </article>
+
+        <!-- ISTOCK -->
+        <article class="card" data-tags="web backend frontend db">
+          <div class="top">
+            <div class="name">
+              <h2>iStock</h2>
+              <div class="subtitle">Full-stack • React.js + Python + Base de données</div>
+            </div>
+            <span class="badge">Projet phare</span>
+          </div>
+
+          <div class="tags">
+            <span class="tag">React</span><span class="tag">Python</span><span class="tag">API</span><span class="tag">DB</span>
+          </div>
+
+          <p class="desc">
+            Application web de <strong>gestion de stock</strong> : frontend React (UI), backend Python (API & logique métier),
+            persistance en base de données.
+          </p>
+
+          <details>
+            <summary>Voir détails</summary>
+            <ul class="bullets">
+              <li>CRUD produits, mouvements de stock, états/quantités.</li>
+              <li>API backend (routes, validation, logique métier).</li>
+              <li>Intégration front/back + gestion des erreurs.</li>
+            </ul>
+          </details>
+
+          <div class="links">
+            <a class="linkbtn" href="https://github.com/TON_GITHUB/istock" target="_blank" rel="noopener">💻 GitHub</a>
+            <a class="linkbtn" href="#" target="_blank" rel="noopener">🚀 Démo</a>
+          </div>
+        </article>
+
+        <!-- MY-INVENTORY -->
+        <article class="card" data-tags="web mobile backend db">
+          <div class="top">
+            <div class="name">
+              <h2>My-Inventory</h2>
+              <div class="subtitle">Web / Mobile • Gestion d’inventaire (front/back séparés)</div>
+            </div>
+            <span class="badge">Full-stack</span>
+          </div>
+
+          <div class="tags">
+            <span class="tag">Web</span><span class="tag">Mobile</span><span class="tag">Backend</span><span class="tag">DB</span>
+          </div>
+
+          <p class="desc">
+            Application de gestion multi-contexte (inventaire/stock) avec séparation claire front/back,
+            et une logique orientée <strong>rôles / accès</strong>.
+          </p>
+
+          <details>
+            <summary>Voir détails</summary>
+            <ul class="bullets">
+              <li>Gestion des rôles, invitations ou accès (selon ton implémentation).</li>
+              <li>Modélisation des entités + opérations d’inventaire.</li>
+              <li>Synchronisation et cohérence des données.</li>
+            </ul>
+          </details>
+
+          <div class="links">
+            <a class="linkbtn" href="https://github.com/TON_GITHUB/my-inventory" target="_blank" rel="noopener">💻 GitHub</a>
+            <a class="linkbtn" href="#" target="_blank" rel="noopener">🚀 Démo</a>
+          </div>
+        </article>
+
+        <!-- RISE OF SERPENTARD -->
+        <article class="card" data-tags="cpp">
+          <div class="top">
+            <div class="name">
+              <h2>Rise of Serpentard</h2>
+              <div class="subtitle">C++ • Projet modulaire / logique de jeu</div>
+            </div>
+            <span class="badge">C++</span>
+          </div>
+
+          <div class="tags">
+            <span class="tag">C++</span><span class="tag">Algorithmique</span><span class="tag">POO</span>
+          </div>
+
+          <p class="desc">
+            Projet en C++ axé sur la <strong>programmation modulaire</strong>, structures de données et logique applicative.
+          </p>
+
+          <details>
+            <summary>Voir détails</summary>
+            <ul class="bullets">
+              <li>Organisation en modules/composants réutilisables.</li>
+              <li>Structures de données et règles de jeu/logique.</li>
+              <li>Rigueur (compilation, interfaces, gestion mémoire selon besoins).</li>
+            </ul>
+          </details>
+
+          <div class="links">
+            <a class="linkbtn" href="https://github.com/TON_GITHUB/rise-of-serpentard" target="_blank" rel="noopener">💻 GitHub</a>
+          </div>
+        </article>
+
+        <!-- INFOBLOG -->
+        <article class="card" data-tags="web backend db">
+          <div class="top">
+            <div class="name">
+              <h2>Infoblog</h2>
+              <div class="subtitle">Web • (Frappe/ERP-style) contenu & gestion</div>
+            </div>
+            <span class="badge">Web</span>
+          </div>
+
+          <div class="tags">
+            <span class="tag">Frappe</span><span class="tag">Web</span><span class="tag">DB</span>
+          </div>
+
+          <p class="desc">
+            Application web orientée contenu (type blog) : modèles de données, pages, et logique de gestion
+            (création, affichage, administration).
+          </p>
+
+          <details>
+            <summary>Voir détails</summary>
+            <ul class="bullets">
+              <li>Conception de DocTypes / modèles selon le besoin.</li>
+              <li>Pages/CRUD, permissions et organisation des contenus.</li>
+              <li>Approche “framework” : conventions, structure, itérations.</li>
+            </ul>
+          </details>
+
+          <div class="links">
+            <a class="linkbtn" href="https://github.com/TON_GITHUB/infoblog" target="_blank" rel="noopener">💻 GitHub</a>
+            <a class="linkbtn" href="#" target="_blank" rel="noopener">🚀 Démo</a>
+          </div>
+        </article>
+
+        <!-- LIL1 -->
+        <article class="card" data-tags="web frontend">
+          <div class="top">
+            <div class="name">
+              <h2>LIL1 (LicenceInfoLyon1)</h2>
+              <div class="subtitle">Site web • Résumés d’UE & contenu pédagogique</div>
+            </div>
+            <span class="badge">Web</span>
+          </div>
+
+          <div class="tags">
+            <span class="tag">Web</span><span class="tag">Contenu</span><span class="tag">HTML/CSS</span>
+          </div>
+
+          <p class="desc">
+            Site web visant à regrouper et structurer des résumés de modules (base de données, OS, etc.)
+            avec une navigation claire et un contenu exploitable.
+          </p>
+
+          <details>
+            <summary>Voir détails</summary>
+            <ul class="bullets">
+              <li>Structuration des pages par UE, contenu hiérarchisé.</li>
+              <li>Approche pédagogique : exemples et synthèses.</li>
+              <li>Organisation du contenu pour lisibilité et réutilisation.</li>
+            </ul>
+          </details>
+
+          <div class="links">
+            <a class="linkbtn" href="https://github.com/TON_GITHUB/lil1" target="_blank" rel="noopener">💻 GitHub</a>
+            <a class="linkbtn" href="#" target="_blank" rel="noopener">🌐 Site</a>
+          </div>
+        </article>
+
+        <!-- JEU D'ECHEC -->
+        <article class="card" data-tags="java">
+          <div class="top">
+            <div class="name">
+              <h2>Jeu d’échecs</h2>
+              <div class="subtitle">Java • Swing • Architecture MVC</div>
+            </div>
+            <span class="badge">Logiciel</span>
+          </div>
+
+          <div class="tags">
+            <span class="tag">Java</span><span class="tag">Swing</span><span class="tag">MVC</span><span class="tag">POO</span>
+          </div>
+
+          <p class="desc">
+            Application desktop d’échecs : implémentation des règles, gestion des interactions,
+            et architecture <strong>MVC</strong>.
+          </p>
+
+          <details>
+            <summary>Voir détails</summary>
+            <ul class="bullets">
+              <li>Déplacements, prises, détection échec / fin de partie (selon ton implémentation).</li>
+              <li>Structure MVC : séparation logique / UI / contrôles.</li>
+              <li>IA de jeu (niveau simple à moyen) + tests manuels.</li>
+            </ul>
+          </details>
+
+          <div class="links">
+            <a class="linkbtn" href="https://github.com/TON_GITHUB/chess-game" target="_blank" rel="noopener">💻 GitHub</a>
+          </div>
+        </article>
+
+        <!-- TACTICAL LEGEND -->
+        <article class="card" data-tags="game">
+          <div class="top">
+            <div class="name">
+              <h2>Tactical Legend</h2>
+              <div class="subtitle">Unity • C# • Jeu tactique 3D</div>
+            </div>
+            <span class="badge">Game</span>
+          </div>
+
+          <div class="tags">
+            <span class="tag">Unity</span><span class="tag">C#</span><span class="tag">POO</span><span class="tag">Gameplay</span>
+          </div>
+
+          <p class="desc">
+            Jeu tactique 3D : logique d’unités, déplacements et combats, structuration orientée objet,
+            et interactions entre entités.
+          </p>
+
+          <details>
+            <summary>Voir détails</summary>
+            <ul class="bullets">
+              <li>Système de PV, conditions de combat, états (ex: mort/KO).</li>
+              <li>Comportements d’unités et interactions dans la scène.</li>
+              <li>Organisation des scripts et données de jeu.</li>
+            </ul>
+          </details>
+
+          <div class="links">
+            <a class="linkbtn" href="https://github.com/TON_GITHUB/tactical-legend" target="_blank" rel="noopener">💻 GitHub</a>
+            <a class="linkbtn" href="#" target="_blank" rel="noopener">🎥 Vidéo</a>
+          </div>
+        </article>
+
+      </div>
+
+      <footer>
+        © <span id="year"></span> — Portfolio. (Modifie les liens GitHub/Démo + le texte selon tes repos.)
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const year = document.getElementById("year");
+    year.textContent = new Date().getFullYear();
+
+    const q = document.getElementById("q");
+    const chips = [...document.querySelectorAll(".chip")];
+    const cards = [...document.querySelectorAll(".card")];
+
+    let activeFilter = "all";
+
+    function normalize(s){
+      return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function matchesFilter(card){
+      if(activeFilter === "all") return true;
+      const tags = (card.getAttribute("data-tags") || "").split(/\s+/).filter(Boolean);
+      return tags.includes(activeFilter);
+    }
+
+    function matchesQuery(card){
+      const query = normalize(q.value.trim());
+      if(!query) return true;
+      const text = normalize(card.textContent);
+      return text.includes(query);
+    }
+
+    function apply(){
+      for(const card of cards){
+        const ok = matchesFilter(card) && matchesQuery(card);
+        card.classList.toggle("hidden", !ok);
+      }
+    }
+
+    chips.forEach(btn => {
+      btn.addEventListener("click", () => {
+        chips.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        apply();
+      });
+    });
+
+    q.addEventListener("input", apply);
+    apply();
+  </script>
+</body>
+</html>
